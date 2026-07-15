@@ -7,6 +7,8 @@ import com.gokdeniz.banking_management_system.repository.AccountRepository;
 import com.gokdeniz.banking_management_system.repository.CustomerRepository;
 import org.springframework.stereotype.Service;
 import java.util.List;
+import com.gokdeniz.banking_management_system.exception.ResourceNotFoundException;
+import com.gokdeniz.banking_management_system.dto.TransferRequest;
 
 @Service
 public class AccountService {
@@ -22,7 +24,8 @@ public class AccountService {
     public Account createAccount(AccountRequest request) {
 
         Customer customer = customerRepository.findById(request.getCustomerId())
-                .orElseThrow();
+                .orElseThrow(() ->
+                        new ResourceNotFoundException("Account not found"));
 
         Account account = new Account();
 
@@ -49,5 +52,39 @@ public class AccountService {
         return accountRepository.save(account);
 
     }
+    public Account withdraw(Long accountId, Double amount) {
+
+        Account account = accountRepository.findById(accountId)
+                .orElseThrow();
+
+        if (account.getBalance() < amount) {
+            throw new RuntimeException("Insufficient balance");
+        }
+
+        account.setBalance(account.getBalance() - amount);
+
+        return accountRepository.save(account);
+    }
+    public void transfer(Long fromId, Long toId, Double amount) {
+
+        Account fromAccount = accountRepository.findById(fromId)
+                .orElseThrow();
+
+        Account toAccount = accountRepository.findById(toId)
+                .orElseThrow();
+
+        if (fromAccount.getBalance() < amount) {
+            throw new RuntimeException("Insufficient balance");
+        }
+
+        fromAccount.setBalance(fromAccount.getBalance() - amount);
+        toAccount.setBalance(toAccount.getBalance() + amount);
+
+        accountRepository.save(fromAccount);
+        accountRepository.save(toAccount);
+    }
+
+
+
 
 }
