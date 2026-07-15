@@ -8,7 +8,7 @@ import com.gokdeniz.banking_management_system.repository.CustomerRepository;
 import org.springframework.stereotype.Service;
 import java.util.List;
 import com.gokdeniz.banking_management_system.exception.ResourceNotFoundException;
-import com.gokdeniz.banking_management_system.dto.TransferRequest;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
 public class AccountService {
@@ -65,6 +65,7 @@ public class AccountService {
 
         return accountRepository.save(account);
     }
+    @Transactional
     public void transfer(Long fromId, Long toId, Double amount) {
 
         Account fromAccount = accountRepository.findById(fromId)

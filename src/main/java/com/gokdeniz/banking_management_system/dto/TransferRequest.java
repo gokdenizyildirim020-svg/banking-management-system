@@ -1,9 +1,17 @@
 package com.gokdeniz.banking_management_system.dto;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Positive;
 
 public class TransferRequest {
 
+    @NotNull
     private Long fromAccountId;
+
+    @NotNull
     private Long toAccountId;
+
+    @NotNull
+    @Positive
     private Double amount;
 
     public Long getFromAccountId() {

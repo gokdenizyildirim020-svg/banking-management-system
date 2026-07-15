@@ -8,6 +8,8 @@ import java.util.List;
 import com.gokdeniz.banking_management_system.dto.DepositRequest;
 import com.gokdeniz.banking_management_system.dto.WithdrawRequest;
 import com.gokdeniz.banking_management_system.dto.TransferRequest;
+import jakarta.validation.Valid;
+
 @RestController
 @RequestMapping("/api/accounts")
 public class AccountController {
@@ -19,7 +21,7 @@ public class AccountController {
     }
 
     @PostMapping
-    public Account createAccount(@RequestBody AccountRequest request) {
+    public Account createAccount(@Valid @RequestBody AccountRequest request) {
         return accountService.createAccount(request);
     }
     @GetMapping
@@ -31,18 +33,18 @@ public class AccountController {
     }
     @PostMapping("/{id}/deposit")
     public Account deposit(@PathVariable Long id,
-                           @RequestBody DepositRequest request) {
+                           @Valid @RequestBody DepositRequest request) {
 
         return accountService.deposit(id, request.getAmount());
     }
     @PostMapping("/{id}/withdraw")
     public Account withdraw(@PathVariable Long id,
-                            @RequestBody WithdrawRequest request) {
+                            @Valid @RequestBody WithdrawRequest request){
 
         return accountService.withdraw(id, request.getAmount());
     }
     @PostMapping("/transfer")
-    public String transfer(@RequestBody TransferRequest request) {
+    public String transfer(@Valid @RequestBody TransferRequest request) {
 
         accountService.transfer(
                 request.getFromAccountId(),

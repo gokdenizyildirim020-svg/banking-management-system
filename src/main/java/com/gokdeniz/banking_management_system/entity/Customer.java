@@ -7,6 +7,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 @Entity
 public class Customer {
 
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -16,12 +17,22 @@ public class Customer {
     private String lastName;
 
     private String email;
+    @JsonIgnore
+    private String password;
 
     @JsonIgnore
 
     @OneToMany(mappedBy = "customer")
 
     private List<Account> accounts;
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
 
     public Long getId() {
         return id;

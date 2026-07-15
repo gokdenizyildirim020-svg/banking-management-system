@@ -1,5 +1,5 @@
 package com.gokdeniz.banking_management_system.service;
-
+import org.springframework.security.crypto.password.PasswordEncoder;
 import com.gokdeniz.banking_management_system.dto.CustomerRequest;
 import com.gokdeniz.banking_management_system.entity.Customer;
 import com.gokdeniz.banking_management_system.mapper.CustomerMapper;
@@ -11,14 +11,19 @@ import java.util.List;
 public class CustomerService {
 
     private final CustomerRepository customerRepository;
+    private final PasswordEncoder passwordEncoder;
+    public CustomerService(CustomerRepository customerRepository,
+                           PasswordEncoder passwordEncoder) {
 
-    public CustomerService(CustomerRepository customerRepository) {
         this.customerRepository = customerRepository;
+        this.passwordEncoder = passwordEncoder;
     }
 
     public Customer createCustomer(CustomerRequest request) {
 
         Customer customer = CustomerMapper.toEntity(request);
+
+        customer.setPassword(passwordEncoder.encode(request.getPassword()));
 
         return customerRepository.save(customer);
     }

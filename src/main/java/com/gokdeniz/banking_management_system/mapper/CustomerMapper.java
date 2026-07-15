@@ -12,6 +12,7 @@ public class CustomerMapper {
         customer.setFirstName(request.getFirstName());
         customer.setLastName(request.getLastName());
         customer.setEmail(request.getEmail());
+        customer.setPassword(request.getPassword());
 
         return customer;
     }
