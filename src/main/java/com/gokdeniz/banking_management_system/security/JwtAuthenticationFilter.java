@@ -46,7 +46,9 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
         Customer customer = customerRepository.findByEmail(email)
                 .orElse(null);
 
-        if (customer != null && jwtService.isTokenValid(token, customer.getEmail())) {
+        if (customer != null
+                && SecurityContextHolder.getContext().getAuthentication() == null
+                && jwtService.isTokenValid(token, customer.getEmail())) {
 
             UsernamePasswordAuthenticationToken authentication =
                     new UsernamePasswordAuthenticationToken(
@@ -63,5 +65,4 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
         }
 
         filterChain.doFilter(request, response);
-    }
-}
+}}

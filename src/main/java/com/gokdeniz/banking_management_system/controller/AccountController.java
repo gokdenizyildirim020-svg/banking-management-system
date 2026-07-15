@@ -3,6 +3,7 @@ package com.gokdeniz.banking_management_system.controller;
 import com.gokdeniz.banking_management_system.dto.AccountRequest;
 import com.gokdeniz.banking_management_system.entity.Account;
 import com.gokdeniz.banking_management_system.service.AccountService;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import com.gokdeniz.banking_management_system.dto.DepositRequest;
@@ -10,6 +11,9 @@ import com.gokdeniz.banking_management_system.dto.WithdrawRequest;
 import com.gokdeniz.banking_management_system.dto.TransferRequest;
 import jakarta.validation.Valid;
 
+
+
+@SecurityRequirement(name = "bearerAuth")
 @RestController
 @RequestMapping("/api/accounts")
 public class AccountController {

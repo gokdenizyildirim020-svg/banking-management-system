@@ -5,6 +5,22 @@ import jakarta.validation.constraints.PositiveOrZero;
 
 public class AccountRequest {
 
+    @NotNull(message = "Customer id is required")
+
+    private Long customerId;
+
+    public Long getCustomerId() {
+
+        return customerId;
+
+    }
+
+    public void setCustomerId(Long customerId) {
+
+        this.customerId = customerId;
+
+    }
+
     @NotBlank(message = "Account number is required")
     private String accountNumber;
 
@@ -12,8 +28,7 @@ public class AccountRequest {
     @PositiveOrZero(message = "Balance cannot be negative")
     private Double balance;
 
-    @NotNull(message = "Customer id is required")
-    private Long customerId;
+
 
     public String getAccountNumber() {
         return accountNumber;
@@ -31,11 +46,5 @@ public class AccountRequest {
         this.balance = balance;
     }
 
-    public Long getCustomerId() {
-        return customerId;
-    }
 
-    public void setCustomerId(Long customerId) {
-        this.customerId = customerId;
-    }
 }

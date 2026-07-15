@@ -25,7 +25,7 @@ public class AccountService {
 
         Customer customer = customerRepository.findById(request.getCustomerId())
                 .orElseThrow(() ->
-                        new ResourceNotFoundException("Account not found"));
+                        new ResourceNotFoundException("Customer not found"));
 
         Account account = new Account();
 
