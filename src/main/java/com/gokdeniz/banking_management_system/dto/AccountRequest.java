@@ -5,21 +5,7 @@ import jakarta.validation.constraints.PositiveOrZero;
 
 public class AccountRequest {
 
-    @NotNull(message = "Customer id is required")
 
-    private Long customerId;
-
-    public Long getCustomerId() {
-
-        return customerId;
-
-    }
-
-    public void setCustomerId(Long customerId) {
-
-        this.customerId = customerId;
-
-    }
 
     @NotBlank(message = "Account number is required")
     private String accountNumber;
