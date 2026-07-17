@@ -7,10 +7,6 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import java.util.HashMap;
 import java.util.Map;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
-import com.gokdeniz.banking_management_system.exception.InvalidCredentialsException;
-import com.gokdeniz.banking_management_system.exception.InsufficientBalanceException;
 
 @RestControllerAdvice
 public class GlobalExceptionHandler {

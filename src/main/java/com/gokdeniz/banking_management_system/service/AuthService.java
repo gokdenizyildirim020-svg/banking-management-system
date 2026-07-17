@@ -8,7 +8,6 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import com.gokdeniz.banking_management_system.exception.InvalidCredentialsException;
 import com.gokdeniz.banking_management_system.security.JwtService;
-import com.gokdeniz.banking_management_system.dto.LoginResponse;
 @Service
 public class AuthService {
 
